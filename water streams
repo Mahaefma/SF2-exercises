@@ -1,0 +1,30 @@
+def main():
+    num_of_streams = int(input())
+    streams_flows = []
+    for i in range(num_of_streams):
+        flows = float(input())
+        streams_flows.append(flows)
+    
+   
+    while True:
+        flow_type = input()
+        if flow_type == "77":  
+            break
+
+        elif flow_type == "99":  
+            split_stream = int(input()) - 1  
+            percentage = int(input())
+            original_flow = streams_flows[split_stream]
+            left = original_flow * percentage / 100
+            right = original_flow - left
+            streams_flows = streams_flows[:split_stream] + [left, right] + streams_flows[split_stream+1:]
+            
+        elif flow_type == "88": 
+            join_stream = int(input()) - 1  
+            combined = streams_flows[join_stream] + streams_flows[join_stream + 1]
+            streams_flows = streams_flows[:join_stream] + [combined] + streams_flows[join_stream+2:]
+     
+    return [round(flow) for flow in streams_flows]
+
+result = main()
+print(result)
